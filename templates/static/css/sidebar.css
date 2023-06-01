@@ -1,0 +1,29 @@
+#sidebar-header{
+padding-left: 6rem;
+width:23rem;
+height:20%;
+background: #2573cc;
+opacity:10;
+display:flex;
+align-items:center;
+color: #fff;
+border-top-right-radius: 2rem;
+}
+
+.items{
+    margin-left: 6rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.sidebar{
+    background-color: #7db7ce;
+    width:23rem;
+    color: #fff;
+    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 2rem;
+    
+}
+
+
+  
+  

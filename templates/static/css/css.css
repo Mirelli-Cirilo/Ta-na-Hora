@@ -1,0 +1,43 @@
+.conteudo{
+   display: grid;
+   grid-template-columns: 1fr 2fr;
+   
+}
+.cardy-body{
+    padding: 20px;  
+    max-width: 500px;
+    
+    background-color: #fff;
+    -webkit-box-shadow: 2px 2px 13px -4px rgba(0,0,0,0.21);
+    box-shadow: 2px 2px 13px -4px rgba(0,0,0,0.21);
+}
+
+input[type=text],
+textarea {
+    border: 1px solid #757575;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+}
+
+label {
+    padding-top: 10px !important;
+    display: block;
+    font-size: larger;
+}
+
+::placeholder {
+    font-weight: 300;
+    opacity: 0.5;
+}
+
+.button {
+    border: 1px solid #757575;
+    background-color: #FFF;
+    color: #62c6df;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
