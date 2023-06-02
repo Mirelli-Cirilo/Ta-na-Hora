@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/delete.css' %}">
+{% endblock %}
+{% block 'body' %}
+<div class="container">
+    <div class="header">
+        <a class="a" href="{% url 'home' %}">&#8592; Voltar</a>
+    </div>
+
+    <div class="card-body">
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <p>Tem certeza que deseja apagar o medicamento {{medicamento.nome}}</p>
+
+            <input class="button" type="submit" value="Apagar">
+        </form>
+    </div>
+</div>
+{% endblock %}

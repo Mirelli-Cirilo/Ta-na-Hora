@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/css.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+
+<div style="margin-left: 28rem;" class="cardy-body">
+    <h3>Detalhes</h3>
+
+    {{medicamento.nome}}
+    <br>
+    {{medicamento.horario}}
+    <br>
+    {{medicamento.descricao}}
+    
+    
+</div>
+
+{% endblock %}
