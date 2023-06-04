@@ -1,35 +1,33 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block 'head' %}
-    
+<link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
 {% endblock %}
 
 {% block 'body' %}
 
-    <div class="container-fluid bg-inscricao">
-        <div class="row">
-            <div class="col-md">
-                <h3 class="logo">Tá na Hora</h3>
-                <div class="box-form">
-                    <h3>LOGIN</h3>
-                    <hr style="border-color: #7E7B7C">
-                
-                    <form action="{% url 'login' %}" method="POST">
-                        {% csrf_token %}
-                        <label>Username:</label>
-                        <input type="text" class="form-control" placeholder="Username..." name="username">
-                        <br>    
-                        <label>Senha</label>
-                        <input type="password" class="form-control" placeholder="Senha..." name="senha">
-                            
-                        <a href="{% url 'cadastro' %}" class="link">Cadastre-se</a>
-                        <br>
-                        <br>
-                        <input type="submit" value="LOGAR" class="btn-principal">
-                    </form>
-                </div>
-            </div>
-        </div>
+<div style="margin-top: 5rem;"  class="container">
+    <div style="width: 34.5rem; margin-left: -0.7rem; " class="header-bar">
+        <h1>LOGIN</h1>
+        <hr style="border-color: #7E7B7C">
     </div>
 
+    <div class="card-body">
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <label>Username:</label>
+            <input type="text" class="form-control" placeholder="Username..." name="username">
+            <br>    
+            <label>Senha</label>
+            <input type="password" class="form-control" placeholder="Senha..." name="senha">
+            <br>
+            <input class="button" type="submit" value="LOGAR" class="btn-principal">
+            
+            <a href="{% url 'cadastro' %}" class="link">Cadastre-se</a>
+            <br>
+            <br>
+            
+        </form>
+    </div>
+</div>    
 {% endblock %}

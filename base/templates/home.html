@@ -8,16 +8,19 @@
 
 {% block 'body' %}
 <div class="conteudo">   
-    <div class="sidebar">
+    <div style="margin-top: 2.7rem;"  class="sidebar">
         <div id="sidebar-header">
             <Header>Meus Medicamento</Header>
         </div>
 
         <div class="items">
             {% for medicamento in medicamentos %}
-                {{medicamento.nome}} | {{medicamento.horario}} <a href="{% url 'delete' medicamento.id %}">X</a>
-                <a href="{% url 'update' medicamento.id %}">U</a>
-                <a href="{% url 'detail' medicamento.id %}">D</a>
+                {{medicamento.nome}} | {{medicamento.horario}} 
+                <a href="{% url 'update' medicamento.id %}"><img style="height: 25px; width: 30px; margin-left: 1rem;" src="{% static 'images/lapis.png' %}" alt="icone de lapis"></a>
+
+                <a href="{% url 'detail' medicamento.id %}"><img style="height: 30px; width: 30px;" src="{% static 'images/olho.png' %}" alt="icone de olho"></a>
+
+                <a href="{% url 'delete' medicamento.id %}"><img style="height: 30px; width: 30px;" src="https://img.icons8.com/?size=1x&id=102315&format=png" alt="icone de lixeira"></a>
                 <br>
                 <br>
                 
@@ -25,7 +28,7 @@
         </div>
     </div>            
     
-    <div class="cardy-body">
+    <div style="max-height: 30rem;" class="cardy-body">
         <h2 class="title">Adicione seu medicamento</h2>
         <form action="{% url 'home' %}" method="POST">
             {% csrf_token %}
