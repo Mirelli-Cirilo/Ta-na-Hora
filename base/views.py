@@ -56,21 +56,20 @@ def detail(request, id):
     context = {'medicamento': medicamento}
     return render(request, 'details.html', context)
 
-scheduler = sched.scheduler(time.time, time.sleep)
+
 
 def envio_email(request):
     
-    send_mail('hora de toma', 'seu remedio puta', 'mirellicirilo44@gmail.com', ['mariamirellicirilo@gmail.com'])
-    scheduler.enterabs((datetime.now() + timedelta(seconds=10)).timestamp(), 1, envio_email)
-    return HttpResponse('nada')
-                    
-def sche():
-    scheduler.enterabs(datetime(year=2023, month=6, day=5, hour=23, minute=57).timestamp(), 1, envio_email)
+    scheduler = sched.scheduler(time.time, time.sleep)
 
-scheduler.run() 
+    def email():
+        send_mail('Hora de Tomar seu remédio', 'Chegou a hora de tomar seu remédio', 'mirellicirilo44@gmail.com', ['mariamirellicirilo@gmail.com'])
+        scheduler.enterabs((datetime.now() + timedelta(seconds=10)).timestamp(), 1, email)
+                
+    def sche():
+        scheduler.enterabs(datetime(year=2023, month=6, day=6, hour=15, minute=11).timestamp(), 1, email)
+        
+    sche()
 
-    
-    
-
-
-
+    scheduler.run()
+    return HttpResponse('passou')
