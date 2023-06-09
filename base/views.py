@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Remedio
 from .forms import Remedioforms
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.core.mail import send_mail
 import sched
@@ -56,18 +57,19 @@ def detail(request, id):
     context = {'medicamento': medicamento}
     return render(request, 'details.html', context)
 
-
-
-def envio_email(request):
-    
+def envio_email(request, id):
+    remedio = Remedio.objects.get(id=id)
+    hora = str(remedio.horario)[0:2]
+    min = str(remedio.horario)[3:5]
+    email_user = request.user.email
     scheduler = sched.scheduler(time.time, time.sleep)
-
+    
     def email():
-        send_mail('Hora de Tomar seu remédio', 'Chegou a hora de tomar seu remédio', 'mirellicirilo44@gmail.com', ['mariamirellicirilo@gmail.com'])
-        scheduler.enterabs((datetime.now() + timedelta(seconds=10)).timestamp(), 1, email)
+        send_mail('Hora de Tomar seu remédio', f'Chegou a hora de tomar seu remédio {remedio.nome}', 'TanaHora1661@gmail.com', [email_user])
+        scheduler.enterabs((datetime.now() + timedelta(seconds=50)).timestamp(), 1, email)
                 
     def sche():
-        scheduler.enterabs(datetime(year=2023, month=6, day=6, hour=15, minute=11).timestamp(), 1, email)
+        scheduler.enterabs(datetime(year=2023, month=6, day=8, hour=int(hora), minute=int(min)).timestamp(), 1, email)
         
     sche()
 
