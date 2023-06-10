@@ -9,10 +9,10 @@ def cadastro(request):
         return render(request, 'cadastro.html')
     
     elif request.method == 'POST':
-        username = request.POST.get(username)
-        email = request.POST.get(email)
-        senha = request.POST.get(senha)
-        confirmar_senha = request.POST.get(confirmar_senha)
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+        confirmar_senha = request.POST.get('confirmar_senha')
 
         if senha != confirmar_senha:
             return HttpResponse('Digite a senha igualmente nos dois campos')
@@ -21,8 +21,9 @@ def cadastro(request):
 
         if user:
             return HttpResponse('Este nomde de usuário já está sendo utilizado.')
-        
+
         user = User.objects.create_user(username=username, email=email, password=senha)
+        login(request, user)
 
         return redirect(reverse('home'))
 

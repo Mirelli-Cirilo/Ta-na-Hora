@@ -1,16 +1,16 @@
-{% extends 'main.html' %}
+{% extends 'main/main.html' %}
 {% load static %}
 
 {% block 'head' %}
-<link rel="stylesheet" href="{% static 'css/css.css' %}">
-<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/side_bar.css' %}">
 {% endblock %}
 
 {% block 'body' %}
 <div class="conteudo">   
-    <div style="margin-top: 2.7rem;"  class="sidebar">
+    <div class="sidebar">
         <div id="sidebar-header">
-            <Header>Meus Medicamento</Header>
+            <Header>Meus Medicamentos</Header>
         </div>
 
         <div class="items">
@@ -28,8 +28,9 @@
         </div>
     </div>            
     
-    <div style="max-height: 30rem;" class="cardy-body">
-        <h2 class="title">Adicione seu medicamento</h2>
+    <div class="cardy-body">
+        <div style="background: #6ecfe7; padding: 1.5rem;"><h2  class="title">Adicione seu medicamento</h2></div>
+        
         <form action="{% url 'home' %}" method="POST">
             {% csrf_token %}
             {{form.as_p}}

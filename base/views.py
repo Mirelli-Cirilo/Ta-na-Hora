@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 
 
 def home(request):
+
     medicamentos = Remedio.objects.all()
     form = Remedioforms
 
