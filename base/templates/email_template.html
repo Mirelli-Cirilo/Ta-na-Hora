@@ -1,0 +1,21 @@
+{% extends 'main/main.html' %}
+
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/delete.css' %}">
+{% endblock %}
+{% block 'body' %}
+<div class="container">
+    <div class="card-body">
+        <form method="POST" action="{% url 'email' medicamento.id %}">
+            {% csrf_token %}
+
+            <p>Você deseja ativar notificações sobre o medicamento {{medicamento.nome}} e receber mensagem em seu e-mail?</p>
+
+            <input class="button" type="submit" value="Ativar">
+            <a style="margin-left: 3rem;" class="btn btn-danger" href="{% url 'home' %}">Retornar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

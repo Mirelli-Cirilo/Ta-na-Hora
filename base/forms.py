@@ -5,4 +5,5 @@ class Remedioforms(forms.ModelForm):
     nome = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Adicione seu medicamento...'}))
     class Meta:
         model = Remedio
-        fields = '__all__'
+        fields = ['nome', 'horario', 'descricao']
+       
