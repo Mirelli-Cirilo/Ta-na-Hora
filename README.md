@@ -1,6 +1,4 @@
 # Ta-na-Hora
-
-
 ```Projeto feito para que você não esqueça mais de tomar seus remédios, a ideia é que você sempre receba um email quando der o seu horário de tomar o medicamento que foi cadastrado. O projeto está no início, mas pretendo deixar bem completo com testes e api rest.```
 
 TECNOLOGIAS: Python, Django, Html, Css.
