@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from .models import Remedio
 from .forms import Remedioforms
 from django.contrib.auth.decorators import login_required
@@ -8,7 +9,7 @@ import sched
 import time
 from datetime import datetime, timedelta
 
-@login_required(login_url='login')
+
 def home(request):
     medicamentos = Remedio.objects.filter(user=request.user.id)[0:7]
     form = Remedioforms
@@ -19,7 +20,7 @@ def home(request):
             return HttpResponse('Dados inválidos')
         else:
             user = form.save(commit=False)
-            user.user = request.user
+            user.user = request.user.id
             user.save()
             return render(request, 'email_template.html', {'medicamento': user})
     
@@ -28,7 +29,7 @@ def home(request):
 
     return render(request, 'home.html', context)
 
-@login_required(login_url='login') 
+
 def delete(request, id):
     medicamento = Remedio.objects.get(id=id)
 
@@ -39,7 +40,7 @@ def delete(request, id):
     context = {'medicamento': medicamento}
     return render(request, 'delete.html', context)
 
-@login_required(login_url='login') 
+
 def update(request, id):
     medicamento = Remedio.objects.get(id=id)
     form = Remedioforms(instance=medicamento)
@@ -55,22 +56,23 @@ def update(request, id):
     context = {'form':form}    
     return render(request, 'update.html', context)
 
-@login_required(login_url='login') 
+
 def detail(request, id):
     medicamento = Remedio.objects.get(id=id)
 
     context = {'medicamento': medicamento}
     return render(request, 'details.html', context)
 
-@login_required(login_url='login') 
+
 def envio_email(request, id):
     
     remedio = Remedio.objects.get(id=id)
+    user = User.objects.get(id=id)
     hora = str(remedio.horario)[0:2]
     min = str(remedio.horario)[3:5]
     hora = int(hora)
     min = int(min)
-    email_user = request.user.email
+    email_user = user.email
     scheduler = sched.scheduler(time.time, time.sleep)
     
     def email():
