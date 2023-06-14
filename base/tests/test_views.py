@@ -18,20 +18,16 @@ class TestViews(TestCase):
             password='abc123#',            
         )
             
-            
-
     def test_home_GET(self):
         response = self.client.get(self.home_url)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
 
     def test_home_POST_add_new_medicine(self):
-        response = self.client.post(self.home_url, {
-            
+        response = self.client.post(self.home_url, {       
             'nome': 'Benzetacil',
             'horario': '16:00',
             'descricao': 'tomar depois de comer',
-            'user': self.user.id
         })
 
         self.assertEquals(response.status_code, 200)
@@ -58,7 +54,6 @@ class TestViews(TestCase):
 
     def test_update_POST(self):
         response = self.client.post(self.update_url, {
-            
             'nome': 'Benzetacil',
             'descricao': 'nao beber suco de maracuja',
         })
@@ -68,5 +63,4 @@ class TestViews(TestCase):
 
     def test_envio_email_POST(self):
         response = self.client.post(self.email_url)
-
         self.assertEquals(response.status_code, 200)

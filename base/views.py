@@ -10,6 +10,7 @@ import time
 from datetime import datetime, timedelta
 
 
+@login_required(login_url='login')
 def home(request):
     medicamentos = Remedio.objects.filter(user=request.user.id)[0:7]
     form = Remedioforms
@@ -29,7 +30,7 @@ def home(request):
 
     return render(request, 'home.html', context)
 
-
+@login_required(login_url='login')
 def delete(request, id):
     medicamento = Remedio.objects.get(id=id)
 
@@ -40,7 +41,7 @@ def delete(request, id):
     context = {'medicamento': medicamento}
     return render(request, 'delete.html', context)
 
-
+@login_required(login_url='login')
 def update(request, id):
     medicamento = Remedio.objects.get(id=id)
     form = Remedioforms(instance=medicamento)
@@ -56,14 +57,14 @@ def update(request, id):
     context = {'form':form}    
     return render(request, 'update.html', context)
 
-
+@login_required(login_url='login')
 def detail(request, id):
     medicamento = Remedio.objects.get(id=id)
 
     context = {'medicamento': medicamento}
     return render(request, 'details.html', context)
 
-
+@login_required(login_url='login')
 def envio_email(request, id):
     
     remedio = Remedio.objects.get(id=id)

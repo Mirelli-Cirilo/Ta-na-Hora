@@ -22,4 +22,5 @@ class TestUrls(SimpleTestCase):
 
     def test_envio_email_url_resolved(self):
         url = reverse('email', args=[1])
-        self.assertEquals(resolve(url).func, envio_email)      
+        self.assertEquals(resolve(url).func, envio_email) 
+             
