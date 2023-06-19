@@ -1,6 +1,7 @@
 from pathlib import Path
 from decouple import config
 import os
+from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,3 +133,11 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST = config('EMAIL_HOST')
+
+MESSAGE_TAGS = {
+    constants.DEBUG: 'alert-primary',
+    constants.ERROR: 'alert-danger',
+    constants.WARNING: 'alert-warning',
+    constants.SUCCESS: 'alert-success',
+    constants.INFO: 'alert-info ',
+}

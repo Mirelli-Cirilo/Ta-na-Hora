@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.urls import reverse
+from django.contrib import messages
+from django.contrib.messages import constants
 
 def cadastro(request):
     if request.method == 'GET':
@@ -28,6 +30,9 @@ def cadastro(request):
         return redirect(reverse('home'))
 
 def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+
     if request.method == 'GET':
         return render(request, 'login.html')
 
@@ -35,13 +40,18 @@ def loginPage(request):
         username = request.POST.get('username')
         senha = request.POST.get('senha')
 
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.add_message(request, constants.ERROR, 'Usuário não foi encontrado.')
+        
         user = authenticate(username=username, password=senha)
 
         if user:
             login(request, user)
             return redirect(reverse('home'))
         else:
-            return HttpResponse('você não está cadastrado ou os dados estão incorretos.')
+            messages.add_message(request, constants.ERROR, 'Nome de usuário ou senha incorretos')
         
 def logoutPage(request):
     logout(request)    

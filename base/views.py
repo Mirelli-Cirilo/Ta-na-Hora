@@ -8,6 +8,9 @@ from django.core.mail import send_mail
 import sched
 import time
 from datetime import datetime, timedelta
+from django.contrib import messages
+from django.contrib.messages import constants
+from django.urls import reverse
 
 
 @login_required(login_url='login')
@@ -18,11 +21,12 @@ def home(request):
     if request.method == 'POST':
         form = Remedioforms(request.POST)
         if not form.is_valid():   
-            return HttpResponse('Dados inválidos')
+            messages.add_message(request, constants.ERROR, 'Informações inválidas')
         else:
             user = form.save(commit=False)
-            user.user = request.user.id
+            user.user = request.user
             user.save()
+            messages.add_message(request, constants.SUCCESS, 'Medicamento salvo')
             return render(request, 'email_template.html', {'medicamento': user})
     
      
@@ -36,7 +40,8 @@ def delete(request, id):
 
     if request.method == 'POST':
         medicamento.delete()
-        return redirect('/')
+        messages.add_message(request, constants.INFO, 'Medicação apagada!')
+        return redirect(reverse('home'))
     
     context = {'medicamento': medicamento}
     return render(request, 'delete.html', context)
@@ -51,8 +56,8 @@ def update(request, id):
 
         if form.is_valid():
             form.save()
-            return redirect('/')
-        
+            messages.add_message(request, constants.SUCCESS, 'Medicamento salvo')                    
+            return redirect(reverse('home'))
       
     context = {'form':form}    
     return render(request, 'update.html', context)
